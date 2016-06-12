@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ThingsDoTo
 {
     [Serializable]
-    abstract public class Event
+    abstract public class Event : IComparable<Event>
     {
         public static List<Type> EventsType;
         static Event()
@@ -47,5 +47,10 @@ namespace ThingsDoTo
         }
 
         abstract public String Data();
+
+        public int CompareTo(Event other)
+        {
+            return Date.CompareTo(other.Date);
+        }
     }
 }
