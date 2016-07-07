@@ -14,12 +14,12 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Wydarzenia">
-                    <MenuItem Header="Dodaj wydarzenie" Click="openAddEventWindow"/>
+                    <MenuItem Header="Dodaj wydarzenie" Click="OpenAddEventWindow"/>
                 </MenuItem>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>
-        <DataGrid DataContext="{StaticResource ItemCollectionViewSource}"   x:Name="dataGrid" ItemsSource="{Binding}"  HorizontalAlignment="Stretch" Margin="0,20,0,0" VerticalAlignment="Stretch" >
+        <DataGrid DataContext="{StaticResource ItemCollectionViewSource}"   x:Name="dataGrid" ItemsSource="{Binding}"  HorizontalAlignment="Stretch" Margin="0,20,0,0" VerticalAlignment="Stretch" CanUserAddRows="False" >
         </DataGrid>
 
     </Grid>

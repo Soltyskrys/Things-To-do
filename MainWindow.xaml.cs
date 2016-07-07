@@ -32,16 +32,16 @@ namespace ThingsDoTo
             InitializeComponent();
             try
             {
-                Events = new ObservableCollection<Event>(loadEvents());
+                Events = new ObservableCollection<Event>(LoadEvents());
             }
             catch(SerializationException)
             {
-                showWarning("Błąd danych", "Dziennik niemożliwy do odtworzenia, przyczyna : błąd serializacji");
+                showWarning("Błąd danych", "Błąd pliku z zapisanymi wydarzeniami");
                 Events = new ObservableCollection<Event>();
             }
             catch(FileNotFoundException)
             {
-                showWarning("Nie odnaleziono kalendarza", "Otwieram nowy kalendarz");
+                showWarning("Witamy w Kalendarzu", "Życzymy przyjemnego korzystania");
                 Events = new ObservableCollection<Event>();
             }
 
@@ -49,6 +49,7 @@ namespace ThingsDoTo
             CollectionViewSource itemCollectionViewSource;
             itemCollectionViewSource = (CollectionViewSource)(FindResource("ItemCollectionViewSource"));
             itemCollectionViewSource.Source = Events;
+
         }
 
         private static void showWarning(String header,String text)
@@ -60,11 +61,11 @@ namespace ThingsDoTo
             MessageBox.Show(messageBoxText, caption, button, icon);
         }
 
-        private void openAddEventWindow(object sender, RoutedEventArgs e)
+        private void OpenAddEventWindow(object sender, RoutedEventArgs e)
         {
             Action<Event> addEvent = AddEvent;
 
-            AddEvent addEventWindow = new AddEvent(addEvent);
+            AddEventWindow addEventWindow = new AddEventWindow(addEvent);
             addEventWindow.Show();
         }
 
@@ -77,7 +78,7 @@ namespace ThingsDoTo
             
         }
 
-        private void saveEvents()
+        private void SaveEvents()
         {
             FileStream stream = File.Create("events");
             var formatter = new BinaryFormatter();
@@ -85,7 +86,7 @@ namespace ThingsDoTo
             stream.Close();
         }
 
-        private List<Event> loadEvents()
+        private List<Event> LoadEvents()
         {
             FileStream stream = File.OpenRead("events");
             var formatter = new BinaryFormatter();
@@ -96,7 +97,7 @@ namespace ThingsDoTo
 
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            saveEvents();
+            SaveEvents();
         }
     }
 }

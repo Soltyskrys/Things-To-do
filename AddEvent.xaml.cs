@@ -18,17 +18,18 @@ namespace ThingsDoTo
     /// <summary>
     /// Interaction logic for AddEvent.xaml
     /// </summary>
-    public partial class AddEvent : Window
+    public partial class AddEventWindow : Window
     {
 
         Action<Event> saveEventDelegate;
         Event operatedEvent;
 
-        public AddEvent(Action<Event> addEvent)
+        public AddEventWindow(Action<Event> addEvent)
         {
             saveEventDelegate = addEvent;
             InitializeComponent();
             comboBox.ItemsSource = Event.EventsType;
+
         }
 
         private void updateInput(object sender, SelectionChangedEventArgs e)
